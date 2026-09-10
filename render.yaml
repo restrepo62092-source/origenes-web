@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: origenes-api
+    runtime: python
+    rootDir: backend
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: MONGO_URL
+        sync: false
+      - key: DB_NAME
+        value: origenes_prod
+      - key: CORS_ORIGINS
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: gerencia@origeneskhachi.org
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: GMAIL_USER
+        value: gerencia@origeneskhachi.org
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: ROBOFLOW_API_KEY
+        sync: false
+      - key: ROBOFLOW_MODEL_ID
+        value: origenes/4
+      - key: ROBOFLOW_API_URL
+        value: https://detect.roboflow.com
+      - key: PLANET_API_KEY
+        sync: false
+      - key: GA_MEASUREMENT_ID
+        sync: false
