@@ -4,15 +4,15 @@ import { ArrowRight, TrendingUp } from 'lucide-react';
 import { heroData } from '../data/mock';
 
 const Hero = () => {
-  const scrollToContact = () => {
-    // Track CTA click
+  const scrollToAudit = () => {
     if (window.gtag) {
       window.gtag('event', 'click', {
         'event_category': 'CTA',
-        'event_label': 'Hero CTA - Solicitar Consultoría'
+        'event_label': 'Hero CTA - Solicitar Auditoría Santuario-Cronos'
       });
     }
-    document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.getElementById('auditoria') || document.getElementById('contacto');
+    target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const scrollToServices = () => {
@@ -68,7 +68,8 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up" style={{ animationDelay: '0.3s' }}>
             <Button
               size="lg"
-              onClick={scrollToContact}
+              onClick={scrollToAudit}
+              data-testid="hero-audit-cta-btn"
               className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               {heroData.ctaText}

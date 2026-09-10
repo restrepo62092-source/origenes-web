@@ -4,7 +4,7 @@ export const heroData = {
   title: "ORÍGENES",
   subtitle: "NUTRICIÓN Y PRECISIÓN",
   description: "Consultoría avanzada en agricultura de precisión. Transformamos datos en decisiones que optimizan tu producción agrícola.",
-  ctaText: "Solicitar Consultoría",
+  ctaText: "Solicitar Auditoría Santuario-Cronos",
   secondaryCtaText: "Conocer Más",
   stats: [
     { number: "17+", label: "Años de Experiencia" },

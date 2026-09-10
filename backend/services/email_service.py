@@ -13,6 +13,7 @@ class EmailService:
         self.smtp_port = 587
         self.sender_email = os.environ.get('GMAIL_USER', 'gerencia@origeneskhachi.org')
         self.sender_password = os.environ.get('GMAIL_APP_PASSWORD', '')
+        self.recipient_email = os.environ.get('NOTIFICATION_EMAIL', 'gerencia@origeneskhachi.org')
 
     def _build_header(self):
         return """
@@ -52,17 +53,25 @@ class EmailService:
                 return False
 
             message = MIMEMultipart("alternative")
-            message["Subject"] = f"[ORÍGENES] Nueva Consulta — {contact_data['name']}"
+            message["Subject"] = f"[ORÍGENES] Auditoría Santuario-Cronos — {contact_data['name']}"
             message["From"] = f"ORÍGENES Consultoría <{self.sender_email}>"
-            message["To"] = self.sender_email
+            message["To"] = self.recipient_email
 
-            hectares_row = ""
-            if contact_data.get('hectares'):
-                hectares_row = f"""
+            def _row(label, value):
+                if value in (None, ""):
+                    return ""
+                return f"""
                 <tr>
-                  <td style="padding:8px 12px;font-size:13px;color:#64748b;border-bottom:1px solid #f1f5f9;width:120px;">Hectáreas</td>
-                  <td style="padding:8px 12px;font-size:13px;color:#1e293b;border-bottom:1px solid #f1f5f9;font-weight:500;">{contact_data['hectares']}</td>
+                  <td style="padding:8px 12px;font-size:13px;color:#64748b;border-bottom:1px solid #f1f5f9;width:150px;">{label}</td>
+                  <td style="padding:8px 12px;font-size:13px;color:#1e293b;border-bottom:1px solid #f1f5f9;font-weight:500;">{value}</td>
                 </tr>"""
+
+            hectares_row = (
+                _row("Municipio", contact_data.get('municipality'))
+                + _row("Hectáreas", contact_data.get('hectares'))
+                + _row("CE del Suelo (dS/m)", contact_data.get('soil_ec'))
+                + _row("pH del Suelo", contact_data.get('soil_ph'))
+            )
 
             html = f"""
             <html><body style="margin:0;padding:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background-color:#f1f5f9;">
@@ -70,11 +79,11 @@ class EmailService:
                 {self._build_header()}
                 <div style="padding:28px 32px;">
                   <div style="background:#fef3c7;border-left:4px solid #d97706;padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:24px;">
-                    <p style="margin:0;font-size:14px;color:#92400e;font-weight:600;">Nueva solicitud de consultoría recibida</p>
+                    <p style="margin:0;font-size:14px;color:#92400e;font-weight:600;">Nueva solicitud de Auditoría Bio-Agronómica Santuario-Cronos</p>
                     <p style="margin:4px 0 0;font-size:12px;color:#a16207;">ID: {contact_data.get('id', 'N/A')} · {str(contact_data.get('created_at', ''))[:19]}</p>
                   </div>
 
-                  <h2 style="font-size:15px;color:#2d5016;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Datos del Cliente</h2>
+                  <h2 style="font-size:15px;color:#2d5016;margin:0 0 12px;text-transform:uppercase;letter-spacing:1px;">Datos del Productor / Empresa</h2>
                   <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
                     <tr>
                       <td style="padding:8px 12px;font-size:13px;color:#64748b;border-bottom:1px solid #f1f5f9;width:120px;">Nombre</td>
@@ -99,7 +108,7 @@ class EmailService:
                     {hectares_row}
                   </table>
 
-                  <h2 style="font-size:15px;color:#2d5016;margin:24px 0 12px;text-transform:uppercase;letter-spacing:1px;">Mensaje</h2>
+                  <h2 style="font-size:15px;color:#2d5016;margin:24px 0 12px;text-transform:uppercase;letter-spacing:1px;">Síntomas / Problemática Observada en Campo</h2>
                   <div style="background:#f0fdf4;padding:16px;border-radius:8px;border-left:4px solid #2d5016;">
                     <p style="margin:0;font-size:14px;color:#1e293b;line-height:1.6;white-space:pre-wrap;">{contact_data['message']}</p>
                   </div>

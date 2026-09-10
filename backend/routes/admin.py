@@ -119,7 +119,7 @@ async def export_contacts_csv(
 
     output = io.StringIO()
     writer = csv.writer(output)
-    writer.writerow(["ID", "Nombre", "Email", "Teléfono", "Departamento", "Cultivo", "Hectáreas", "Mensaje", "Estado", "Fecha"])
+    writer.writerow(["ID", "Nombre", "Email", "Teléfono", "Departamento", "Municipio", "Cultivo", "Hectáreas", "CE Suelo (dS/m)", "pH Suelo", "Síntomas / Problemática", "Estado", "Fecha"])
 
     for c in contacts:
         writer.writerow([
@@ -128,8 +128,11 @@ async def export_contacts_csv(
             c.get("email", ""),
             c.get("phone", ""),
             c.get("department", ""),
+            c.get("municipality", ""),
             c.get("culture", ""),
             c.get("hectares", ""),
+            c.get("soil_ec", ""),
+            c.get("soil_ph", ""),
             c.get("message", ""),
             c.get("status", ""),
             str(c.get("created_at", ""))[:19],
