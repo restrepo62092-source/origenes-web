@@ -144,7 +144,7 @@ const Contact = () => {
                 <div>
                   <div className="font-semibold mb-1">Teléfono / WhatsApp</div>
                   <div className="text-green-100" data-testid="contact-phone-1">+57 300 558 2757</div>
-                  <div className="text-green-100" data-testid="contact-phone-2">+57 310 321 2780</div>
+                  <div className="text-green-100" data-testid="contact-phone-2">+57 313 338 4608</div>
                 </div>
               </div>
 

@@ -33,7 +33,7 @@ class EmailService:
           <table width="100%" cellpadding="0" cellspacing="0"><tr>
             <td>
               <p style="margin:0;font-size:12px;color:#64748b;">gerencia@origeneskhachi.org</p>
-              <p style="margin:2px 0 0;font-size:12px;color:#64748b;">+57 300 558 2757 / +57 310 321 2780</p>
+              <p style="margin:2px 0 0;font-size:12px;color:#64748b;">+57 300 558 2757 / +57 313 338 4608</p>
             </td>
             <td align="right">
               <p style="margin:0;font-size:11px;color:#94a3b8;">Finca La Esperanza, Vda La Rambla</p>

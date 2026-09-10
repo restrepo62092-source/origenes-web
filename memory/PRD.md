@@ -22,7 +22,7 @@ naranja/marrón `#d97706`, blanco.
 ### Junio 2026 y anterior
 - Landing completa: Hero, Servicios, Cultivos, Tecnologías, Experiencia, Biofactoría,
   Formulación magistral, Testimonios, FAQ, Footer.
-- Contacto corporativo: `gerencia@origeneskhachi.org`, +57 300 558 2757 y +57 310 321 2780.
+- Contacto corporativo: `gerencia@origeneskhachi.org`, +57 300 558 2757 y +57 313 338 4608.
 - Roboflow: diagnóstico por imagen (claves en variables de entorno).
 - Planet: `routes/planet.py` con **Data API + thumbnails reales** (Basemaps/tiles NO
   autorizados por la credencial actual — no reintentar).
